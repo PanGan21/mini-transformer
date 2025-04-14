@@ -50,3 +50,16 @@ class MultiHeadAttention(nn.Module):
         # Combine the multiple heads back to original shape
         batch_size, _, seq_legth, _ = x.size()
         return x.transpose(1, 2).contiguous().view(batch_size, seq_legth, self.d_model)
+
+    def forward(self, Q, K, V, mask=None):
+        # Apply linear transformations and split heads
+        Q = self.split_heads(self.W_q(Q))
+        K = self.split_heads(self.W_k(K))
+        V = self.split_heads(self.W_v(V))
+
+        # Performa scaled dot-product attention
+        attention_output = self.scaled_dot_product_attention(Q, K, V, mask)
+
+        # Combine heads and apply output transformation
+        output = self.W_o(self.combine_heads(attention_output))
+        return output
