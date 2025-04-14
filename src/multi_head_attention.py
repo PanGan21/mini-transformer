@@ -16,7 +16,7 @@ class MultiHeadAttention(nn.Module):
 
         # Initialize dimensions
         self.d_model = d_model  # Model's dimension
-        self.num_of_heads = num_heads  # Number of attention heads
+        self.num_heads = num_heads  # Number of attention heads
         self.d_k = d_model // num_heads  # Dimension of each head's key, query, value
 
         # Linear layers for transforming inputs
@@ -40,3 +40,8 @@ class MultiHeadAttention(nn.Module):
         # Multiply by values to obtain the final output
         output = torch.matmul(attention_probabilitites, V)
         return output
+
+    def split_heads(self, x):
+        # Reshape the input to have num_heads for multi-head attention
+        batch_size, seq_length, d_model = x.size()
+        return x.view(batch_size, seq_length, self.num_heads, self.d_k).transpose(1, 2)
