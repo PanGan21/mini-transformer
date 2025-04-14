@@ -43,5 +43,10 @@ class MultiHeadAttention(nn.Module):
 
     def split_heads(self, x):
         # Reshape the input to have num_heads for multi-head attention
-        batch_size, seq_length, d_model = x.size()
+        batch_size, seq_length, _ = x.size()
         return x.view(batch_size, seq_length, self.num_heads, self.d_k).transpose(1, 2)
+
+    def combine_heads(self, x):
+        # Combine the multiple heads back to original shape
+        batch_size, _, seq_legth, _ = x.size()
+        return x.transpose(1, 2).contiguous().view(batch_size, seq_legth, self.d_model)
