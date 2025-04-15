@@ -1,6 +1,8 @@
 import torch.nn as nn
 
 
+# Position-wise fully connected layers
+# Transforms the attention outputs, adding complexity
 class PositionWiseFeedForward(nn.Module):
     """
     Position-wise Feed Forward Network (FFN) layer used in Transformer architecture.
