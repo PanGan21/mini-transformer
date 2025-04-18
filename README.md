@@ -1,4 +1,4 @@
-# Mini-Transformer Implementation
+# mini-transformer Implementation
 
 A PyTorch implementation of the Transformer architecture based on the "Attention Is All You Need" paper. This project implements a scaled-down version of the Transformer model, suitable for learning and experimentation.
 
