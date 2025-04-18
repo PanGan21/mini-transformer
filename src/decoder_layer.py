@@ -1,7 +1,7 @@
 import torch.nn as nn
 
-from multi_head_attention import MultiHeadAttention
-from position_wise_feed_forward import PositionWiseFeedForward
+from src.multi_head_attention import MultiHeadAttention
+from src.position_wise_feed_forward import PositionWiseFeedForward
 
 
 # The EncoderLayer consists off a multi-head self-attention mechanism, a multi-head cross-attention mechanism

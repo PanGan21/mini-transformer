@@ -1,7 +1,7 @@
 import torch.nn as nn
 
-from multi_head_attention import MultiHeadAttention
-from position_wise_feed_forward import PositionWiseFeedForward
+from src.multi_head_attention import MultiHeadAttention
+from src.position_wise_feed_forward import PositionWiseFeedForward
 
 
 # The EncoderLayer encapsulates a multi-head self-attention mechanism followed by the position-wise feed-forward neural network,

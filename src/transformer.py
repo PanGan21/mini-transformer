@@ -1,9 +1,9 @@
 import torch
 import torch.nn as nn
 
-from positional_encoding import PositionalEncoding
-from encoder_layer import EncoderLayer
-from decoder_layer import DecoderLayer
+from src.positional_encoding import PositionalEncoding
+from src.encoder_layer import EncoderLayer
+from src.decoder_layer import DecoderLayer
 
 
 # The Transformer class brings together the various components of a Transformer model,
@@ -42,6 +42,7 @@ class Transformer(nn.Module):
 
         self.encoder_embedding = nn.Embedding(src_vocab_size, d_model)
         self.decoder_embedding = nn.Embedding(tgt_vocab_size, d_model)
+
         self.positional_encoding = PositionalEncoding(d_model, max_seq_length)
 
         self.encoder_layers = nn.ModuleList(
@@ -118,7 +119,7 @@ class Transformer(nn.Module):
 
         dec_output = tgt_embedded
         for dec_layer in self.decoder_layers:
-            dec_output = dec_layer(dec_output, tgt_mask)
+            dec_output = dec_layer(dec_output, enc_output, src_mask, tgt_mask)
 
         output = self.fc(dec_output)
         return output
